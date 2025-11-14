@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Formulário para cadastro</h1>
+
+    <form action="" name="cadastroForm">
+        <fieldset>
+            <legend>Formulário para criar usuário</legend>
+
+            <label for="complete_name">Digite seu nome:</label>
+            <input type="text" id="complete_name" name="complete_name">
+
+            <br><br> <label for="user_mail">Digite seu e-mail:</label>
+            <input type="text" id="user_mail" name="user_mail">
+
+            <br><br>
+
+            <label for="ability_input">Adicionar habilidade:</label>
+            <input type="text" id="ability_input" name="ability_input">
+
+            <label for="add_ability_button">Botão de Adicionar Habilidade</label>
+            <button type="button" id="add_ability_button">Adicionar</button>
+
+            <br><br>
+
+            <label for="list_skills">Lista de Habilidades Adicionadas</label>
+            <select id="list_skills" name="list_skills" multiple>
+            </select>
+
+            <br><br>
+
+            <p>Tipo de Interesse:</p>
+            <input type="radio" id="interesse_front" name="interesse_type" value="frontend">
+            <label for="interesse_front">Front-end</label>
+
+            <input type="radio" id="interesse_back" name="interesse_type" value="backend">
+            <label for="interesse_back">Back-end</label>
+
+            <input type="radio" id="interesse_full" name="interesse_type" value="fullstack">
+            <label for="interesse_full">Full-stack</label>
+
+            <br><br>
+
+            <!-- <label for="submit_button">Botão de submissão</label>
+            <button id="submit_button">Finalizar</button> -->
+
+        </fieldset>
+    </form>
+
+    <button id="submit_button">Finalizar</button>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
