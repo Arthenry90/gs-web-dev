@@ -1,14 +1,15 @@
 let habilidades = [];
 
-document.addEventListener("DOMContentLoaded", function() {
+// Inicializa os eventos assim que a página carrega
+document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("futureSkillsForm");
     const btnAddHabilidade = document.getElementById("btnAddHabilidade");
-    const btnSubmit = document.getElementById("btnSubmit");
 
     btnAddHabilidade.addEventListener("click", adicionarHabilidade);
     form.addEventListener("submit", validarFormulario);
 });
 
+// Adiciona a skill no array e atualiza a lista visual (HTML)
 function adicionarHabilidade() {
     const input = document.getElementById("habilidadeInput");
     const habilidadeTexto = input.value.trim();
@@ -24,8 +25,9 @@ function adicionarHabilidade() {
     }
 }
 
+// Valida todos os campos obrigatórios e regras de negócio
 function validarFormulario(event) {
-    event.preventDefault();
+    event.preventDefault(); // Evita o refresh da página
     let vetorErros = [];
 
     const nome = document.getElementById("nome").value.trim();
@@ -33,19 +35,16 @@ function validarFormulario(event) {
     const email = document.getElementById("email").value.trim();
     const interesseRadio = document.querySelector('input[name="interesse"]:checked');
 
+    // Verificações básicas
     if (nome === "") {
         vetorErros.push("O campo 'Nome Completo' é obrigatório.");
     }
 
     const erroCpf = checarCPF(cpf);
-    if (erroCpf) {
-        vetorErros.push(erroCpf);
-    }
+    if (erroCpf) vetorErros.push(erroCpf);
 
     const erroEmail = checarEmail(email);
-    if (erroEmail) {
-        vetorErros.push(erroEmail);
-    }
+    if (erroEmail) vetorErros.push(erroEmail);
 
     if (!interesseRadio) {
         vetorErros.push("Selecione um 'Tipo de Interesse'.");
@@ -55,6 +54,7 @@ function validarFormulario(event) {
         vetorErros.push("Adicione pelo menos 3 habilidades à lista.");
     }
 
+    // Define se mostra erros ou sucesso
     if (vetorErros.length > 0) {
         exibirFeedback(vetorErros, 'erro');
     } else {
@@ -72,28 +72,21 @@ function validarFormulario(event) {
     }
 }
 
+// Verifica formato e repetição de dígitos no CPF
 function checarCPF(cpf) {
-    if (cpf === "") {
-        return "O campo 'CPF' é obrigatório.";
-    }
+    if (cpf === "") return "O campo 'CPF' é obrigatório.";
 
     const cpfLimpo = cpf.replace(/\D/g, '');
 
-    if (cpfLimpo.length !== 11) {
-        return "CPF inválido. Deve conter 11 dígitos.";
-    }
-
-    if (/^(\d)\1+$/.test(cpfLimpo)) {
-        return "CPF inválido (dígitos repetidos).";
-    }
+    if (cpfLimpo.length !== 11) return "CPF inválido. Deve conter 11 dígitos.";
+    if (/^(\d)\1+$/.test(cpfLimpo)) return "CPF inválido (dígitos repetidos).";
 
     return null;
 }
 
+// Valida o formato do e-mail via Regex
 function checarEmail(email) {
-    if (email === "") {
-        return "O campo 'E-mail' é obrigatório.";
-    }
+    if (email === "") return "O campo 'E-mail' é obrigatório.";
 
     const emailNormalizado = email.toLowerCase();
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -105,6 +98,7 @@ function checarEmail(email) {
     return null;
 }
 
+// Manipula o DOM para mostrar mensagens de erro ou sucesso
 function exibirFeedback(vetorMensagens, tipo) {
     const feedbackDiv = document.getElementById("feedback");
     feedbackDiv.innerHTML = "";
